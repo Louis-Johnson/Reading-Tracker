@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 type Book = {
   id: number;
@@ -31,9 +32,11 @@ export default function BookList() {
     <ul className="space-y-2">
       {data.map((book) => (
         <li key={book.id}>
-          <p>{book.title}</p>
-          <p>{book.author}</p>
-          <p>{book.status}</p>
+          <Link href={`/book/${book.id}`}>
+            <p>{book.title}</p>
+            <p>{book.author}</p>
+            <p>{book.status}</p>
+          </Link>
         </li>
       ))}
     </ul>

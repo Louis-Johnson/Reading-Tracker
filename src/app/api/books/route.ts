@@ -19,12 +19,45 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const {
+      title,
+      author,
+      category,
+      genre,
+      form,
+      format,
+      languageCode,
+      translator,
+      status,
+      notes,
+    } = body;
 
-    const { title, author, status } = body;
-
-    if (!title || !author) {
+    if (!title || !author || !category) {
       return NextResponse.json(
-        { error: "Title and author are required" },
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
+
+    const Category = ["FICTION", "NON_FICTION"] as const;
+    const Status = ["TO_READ", "READING", "FINISHED"] as const;
+    const Format = ["PHYSICAL", "EBOOK", "AUDIOBOOK"] as const;
+
+    if (!Category.includes(category)) {
+      return NextResponse.json(
+        { error: "Invalid category enum" },
+        { status: 400 },
+      );
+    }
+    if (status && !Status.includes(status)) {
+      return NextResponse.json(
+        { error: "Invalid status enum" },
+        { status: 400 },
+      );
+    }
+    if (format && !Format.includes(format)) {
+      return NextResponse.json(
+        { error: "Invalid format enum" },
         { status: 400 },
       );
     }
@@ -33,14 +66,20 @@ export async function POST(req: Request) {
       data: {
         title,
         author,
-        status: status || "TO_READ",
-        category: "FICTION",
+        category,
+        genre,
+        form,
+        format,
+        languageCode,
+        translator,
+        status,
+        notes,
       },
     });
 
     return NextResponse.json(newBook, { status: 201 });
-  } catch (error) {
-    console.error("Error creating book:", error);
+  } catch (error: any) {
+    console.error("Error creating book:", error.message || error);
     return NextResponse.json(
       { error: "Failed to create book" },
       { status: 500 },
