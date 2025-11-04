@@ -71,10 +71,10 @@ export default function BookPage() {
   } = data;
 
   return (
-    <main>
-      <h1>{title}</h1>
+    <main className="bg-white rounded-lg shadow-md p-6">
+      <h1 className="text-2xl font-bold text-indigo-700 mb-4">{title}</h1>
 
-      <div>
+      <div className="space-y-2 text-gray-700">
         <p>
           <strong>Author:</strong> {author}
         </p>
@@ -108,10 +108,12 @@ export default function BookPage() {
         {notes && (
           <div>
             <strong>Notes:</strong>
-            <p>{notes}</p>
+            <p className="mt-1 text-gray-600 italic">{notes}</p>
           </div>
         )}
-        <p>Added on {new Date(createdAt).toLocaleDateString()}</p>
+        <p className="text-sm text-gray-500">
+          Added on {new Date(createdAt).toLocaleDateString()}
+        </p>
 
         <button
           onClick={() => {
@@ -120,11 +122,13 @@ export default function BookPage() {
             }
           }}
           disabled={deleteMutation.isPending}
+          className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
         >
           {deleteMutation.isPending ? "Deleting..." : "Delete Book"}
         </button>
-
-        {deleteMutation.isError && <p>Error deleting book.</p>}
+        {deleteMutation.isError && (
+          <p className="text-red-600 mt-2">Error deleting book.</p>
+        )}
       </div>
     </main>
   );

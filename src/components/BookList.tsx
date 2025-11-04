@@ -11,7 +11,6 @@ type Book = {
 };
 
 async function fetchBooks(): Promise<Book[]> {
-  // Syntax needs explaining
   const res = await fetch("/api/books");
   if (!res.ok) throw new Error("Failed to fetch books");
   return res.json();
@@ -30,13 +29,18 @@ export default function BookList() {
     return <p>No books yet — add your first one!</p>;
 
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-4">
       {data.map((book) => (
-        <li key={book.id}>
-          <Link href={`/book/${book.id}`}>
-            <p>{book.title}</p>
-            <p>{book.author}</p>
-            <p>{book.status}</p>
+        <li
+          key={book.id}
+          className="bg-white shadow-sm rounded-lg p-4 hover:shadow-md transition"
+        >
+          <Link href={`/book/${book.id}`} className="block">
+            <h2 className="text-lg font-semibold text-indigo-600 hover:underline">
+              {book.title}
+            </h2>
+            <p className="text-gray-700">{book.author}</p>
+            <p className="text-sm text-gray-500">{book.status}</p>
           </Link>
         </li>
       ))}

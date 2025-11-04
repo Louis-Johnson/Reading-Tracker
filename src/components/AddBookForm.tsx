@@ -62,81 +62,134 @@ export default function AddBookForm() {
         e.preventDefault();
         mutation.mutate();
       }}
+      className="mt-8 bg-white shadow-md rounded-lg p-6 space-y-4"
     >
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Book title"
-        required
-      />
-      <input
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        placeholder="Author"
-        required
-      />
+      <h2 className="text-xl font-semibold mb-2">Add a Book</h2>
 
-      <div>
-        <label>Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Title</label>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Book title"
+          required
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Author</label>
+        <input
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          placeholder="Author"
+          required
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Category</label>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
           <option value="FICTION">Fiction</option>
           <option value="NON_FICTION">Non-fiction</option>
         </select>
       </div>
 
-      <input
-        value={genre}
-        onChange={(e) => setGenre(e.target.value)}
-        placeholder="Genre (e.g. Philosophy, Fantasy)"
-      />
-      <input
-        value={form}
-        onChange={(e) => setForm(e.target.value)}
-        placeholder="Form (e.g. Novel, Essay)"
-      />
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Genre</label>
+        <input
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+          placeholder="Genre (e.g. Philosophy, Fantasy)"
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
 
-      <div>
-        <label>Format</label>
-        <select value={format} onChange={(e) => setFormat(e.target.value)}>
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Form</label>
+        <input
+          value={form}
+          onChange={(e) => setForm(e.target.value)}
+          placeholder="Form (e.g. Novel, Essay)"
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Format</label>
+        <select
+          value={format}
+          onChange={(e) => setFormat(e.target.value)}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
           <option value="PHYSICAL">Physical</option>
           <option value="EBOOK">Ebook</option>
           <option value="AUDIOBOOK">Audiobook</option>
         </select>
       </div>
 
-      <input
-        value={languageCode}
-        onChange={(e) => setLanguageCode(e.target.value)}
-        placeholder='Language code (e.g. "en", "fr")'
-      />
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Language code</label>
+        <input
+          value={languageCode}
+          onChange={(e) => setLanguageCode(e.target.value)}
+          placeholder='Language code (e.g. "en", "fr")'
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
 
-      <input
-        value={translator}
-        onChange={(e) => setTranslator(e.target.value)}
-        placeholder="Translator (if applicable)"
-      />
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Translator</label>
+        <input
+          value={translator}
+          onChange={(e) => setTranslator(e.target.value)}
+          placeholder="Translator (if applicable)"
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
 
-      <div>
-        <label>Status</label>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Status</label>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
           <option value="TO_READ">To Read</option>
           <option value="READING">Reading</option>
           <option value="FINISHED">Finished</option>
         </select>
       </div>
 
-      <textarea
-        rows={3}
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        placeholder="Notes..."
-      />
+      <div className="flex flex-col space-y-1">
+        <label className="text-sm font-medium">Notes</label>
+        <textarea
+          rows={3}
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Notes..."
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
 
-      <button type="submit" disabled={mutation.isPending}>
+      <button
+        type="submit"
+        disabled={mutation.isPending}
+        className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-60 transition"
+      >
         {mutation.isPending ? "Adding..." : "Add Book"}
       </button>
 
-      {mutation.isError && <p>{(mutation.error as Error).message}</p>}
+      {mutation.isError && (
+        <p className="text-sm text-red-600 mt-2">
+          {(mutation.error as Error).message}
+        </p>
+      )}
     </form>
   );
 }

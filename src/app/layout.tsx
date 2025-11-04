@@ -14,8 +14,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900">
-        <Providers>{children}</Providers>
+      <body className="min-h-screen bg-slate-100 text-gray-900 antialiased">
+        <Providers>
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <header className="mb-10 border-b pb-4">
+              <h1 className="text-3xl font-bold text-indigo-700">
+                Reading Tracker
+              </h1>
+            </header>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );
