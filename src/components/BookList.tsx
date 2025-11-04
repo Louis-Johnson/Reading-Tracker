@@ -11,6 +11,7 @@ type Book = {
 };
 
 async function fetchBooks(): Promise<Book[]> {
+  // Syntax needs explaining
   const res = await fetch("/api/books");
   if (!res.ok) throw new Error("Failed to fetch books");
   return res.json();

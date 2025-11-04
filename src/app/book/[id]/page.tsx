@@ -1,7 +1,7 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams, useRouter } from "next/navigation";
 
 type Book = {
   id: number;
@@ -25,14 +25,31 @@ async function fetchBook(id: string): Promise<Book> {
   return res.json();
 }
 
+async function deleteBook(id: string) {
+  const res = await fetch(`/api/books/${id}`, { method: "DELETE" });
+  if (!res.ok) throw new Error("Failed to delete book");
+  return res.json();
+}
+
 export default function BookPage() {
   const params = useParams();
   const id = params?.id as string;
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["book", id],
     queryFn: () => fetchBook(id),
     enabled: !!id,
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteBook(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+
+      router.push("/");
+    },
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -95,6 +112,19 @@ export default function BookPage() {
           </div>
         )}
         <p>Added on {new Date(createdAt).toLocaleDateString()}</p>
+
+        <button
+          onClick={() => {
+            if (confirm("Are you sure you want to delete this book?")) {
+              deleteMutation.mutate();
+            }
+          }}
+          disabled={deleteMutation.isPending}
+        >
+          {deleteMutation.isPending ? "Deleting..." : "Delete Book"}
+        </button>
+
+        {deleteMutation.isError && <p>Error deleting book.</p>}
       </div>
     </main>
   );
