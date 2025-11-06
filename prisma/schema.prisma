@@ -30,6 +30,68 @@ model Book {
   updatedAt    DateTime @updatedAt
 }
 
+/*
+Book model fields to add:
+- ISBN
+- Original Language
+- Publisher
+- Publication Date
+- Number of Pages
+- Cover image URL - Implement a way to search for the cover image
+- Tags - Implement a way to add multiple tags to a book
+- Series - Implement a way to link books in a series
+- Reading Start Date
+- Reading End Date
+- Review - Implement a way to add a detailed review for the book
+- Short Summary
+- Edition?
+
+- Notes - This will be a whole structure on its own
+*/
+
+/*
+Create enums for form:
+For Fiction:
+- NOVEL
+- NOVELLA
+- SHORT_STORY
+- SHORT_STORY_COLLECTION
+- POETRY_COLLECTION
+- EPIC_POEM
+- PLAY
+- SCREENPLAY
+- AUDIO_DRAMA
+- COMIC
+- GRAPHIC_NOVEL
+- MANGA
+- LIGHT_NOVEL
+- FAIRY_TALE
+- FABLE
+- MYTHOLOGY
+- PARABLE
+- FANFICTION
+- INTERACTIVE_FICTION
+- SERIALIZED_STORY
+
+For Non-Fiction:
+- BIOGRAPHY
+- AUTOBIOGRAPHY
+- MEMOIR
+- ESSAY
+- ESSAY_COLLECTION
+- TREATISE
+- DISSERTATION or THESIS
+- PAPER
+- ARTICLE
+- JOURNAL
+- MANUAL
+- TEXTBOOK
+- MAGAZINE
+- ACADEMIC_PAPER
+- NOTEBOOK
+- DIARY
+*/
+
 enum Category {
   FICTION
   NON_FICTION
@@ -46,3 +108,9 @@ enum Status {
   READING
   FINISHED
 }
+
+/*
+Add to Status enums:
+- ABANDONED
+- PAUSED
+*/
