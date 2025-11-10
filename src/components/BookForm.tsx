@@ -155,7 +155,7 @@ export default function BookForm() {
         </FieldContent>
       </Field>
 
-      {/* Genre FIELD */}
+      {/* GENRE FIELD */}
       <Field>
         <FieldLabel>Genre</FieldLabel>
         <FieldContent>
@@ -168,7 +168,7 @@ export default function BookForm() {
         </FieldContent>
       </Field>
 
-      {/* Form FIELD */}
+      {/* FORM FIELD */}
       <Field>
         <FieldLabel>Text Form</FieldLabel>
         <FieldContent>
